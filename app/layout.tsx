@@ -3,8 +3,8 @@ import { Header } from "@/components/header";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "StoreMart - Your Online Shopping Destination",
-  description: "Shop clothing, footwear, and electronics at amazing prices",
+  title: "MYSHOPPY — Luxury Fashion & Lifestyle",
+  description: "Discover curated fashion, footwear, and electronics at MYSHOPPY",
   icons: {
     icon: "/favicon.ico",
   },
@@ -22,17 +22,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-white">
-      <body className="text-gray-900 antialiased">
+    <html lang="en" style={{ backgroundColor: 'var(--surface-canvas)' }}>
+      <body style={{ color: 'var(--color-carbon)', backgroundColor: 'var(--surface-canvas)' }}>
         <Header />
-        <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+        <main className="mx-auto px-4 sm:px-8" style={{ maxWidth: 'var(--page-max-width)', paddingTop: 'var(--spacing-48)', paddingBottom: 'var(--spacing-48)' }}>
           {children}
         </main>
-        <footer className="mt-12 border-t border-gray-200 bg-gray-50 py-8">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <p className="text-center text-sm text-gray-600">
-              © 2024 StoreMart. All rights reserved.
-            </p>
+        <footer style={{ marginTop: 'var(--spacing-72)', borderTop: '1px solid var(--color-smoke)', backgroundColor: 'var(--surface-inversion)', color: 'var(--color-paper)', padding: 'var(--spacing-48)' }}>
+          <div className="mx-auto px-4 sm:px-8 text-center" style={{ maxWidth: 'var(--page-max-width)', fontSize: 'var(--text-caption)' }}>
+            <p>© 2024 MYSHOPPY. All rights reserved.</p>
           </div>
         </footer>
       </body>
