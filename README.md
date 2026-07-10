@@ -1,36 +1,176 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# StoreMart - Ecommerce Store
+
+A modern, minimal Flipkart-style ecommerce storefront built with Next.js 16, TypeScript, and Shopify Storefront API.
+
+## Features
+
+- **Product Catalog**: Browse products across Clothing, Footwear, and Electronics categories
+- **Modern UI**: Clean, minimal design with responsive layouts
+- **Product Filtering**: Filter by price range and sort options
+- **Product Details**: Detailed product pages with images, descriptions, and variants
+- **Dynamic Data**: Real-time product data from Shopify
+- **Mobile Responsive**: Fully responsive design for all devices
+- **Fast Performance**: Optimized images and lazy loading
+
+## Tech Stack
+
+- **Framework**: Next.js 16 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4
+- **Backend**: Shopify Storefront API
+- **Deployment**: Vercel
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Node.js 18+ 
+- pnpm (or npm/yarn)
+- Shopify Store with Storefront API access
+
+### Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/naraharitarun16/ecommerce-store.git
+cd ecommerce-store
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+pnpm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Set up environment variables:
+```bash
+cp .env.example .env.local
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Add your Shopify credentials:
+```
+NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN=your-store.myshopify.com
+NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN=your_storefront_access_token
+```
 
-## Learn More
+5. Run the development server:
+```bash
+pnpm dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Open [http://localhost:3000](http://localhost:3000) to view the store.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+ecommerce-store/
+├── app/
+│   ├── page.tsx              # Homepage with featured products
+│   ├── layout.tsx            # Root layout with header & footer
+│   ├── globals.css           # Global styles
+│   ├── cart/page.tsx         # Shopping cart page
+│   ├── category/
+│   │   └── [slug]/page.tsx   # Category pages (Clothing, Footwear, Electronics)
+│   └── products/
+│       └── [id]/page.tsx     # Product detail page
+├── components/
+│   ├── header.tsx            # Main navigation header
+│   ├── product-card.tsx      # Individual product card
+│   └── product-grid.tsx      # Grid of product cards
+├── lib/
+│   ├── shopify.ts            # Shopify API client
+│   └── types.ts              # TypeScript type definitions
+├── public/                   # Static assets
+├── next.config.ts            # Next.js configuration
+├── tailwind.config.ts        # Tailwind CSS config
+├── tsconfig.json             # TypeScript configuration
+└── package.json              # Dependencies
+```
 
-## Deploy on Vercel
+## Key Pages
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Homepage** (`/`) - Hero section with category highlights and featured products
+- **Category** (`/category/clothing`, `/category/footwear`, `/category/electronics`) - Filtered product listings
+- **Product Detail** (`/products/[id]`) - Full product information with images and variants
+- **Cart** (`/cart`) - Shopping cart management
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## API Integration
+
+The store uses Shopify Storefront GraphQL API for:
+- Fetching all products
+- Fetching products by collection/category
+- Searching products
+- Getting product details with variants
+
+All API calls are made from the `lib/shopify.ts` file.
+
+## Styling
+
+Uses Tailwind CSS v4 with:
+- Clean white/gray color palette
+- Blue accent color (#1890FF) for calls-to-action
+- Modern minimal aesthetic
+- Smooth transitions and hover effects
+- Mobile-first responsive design
+
+## Performance
+
+- Static page generation where possible
+- Image optimization with Next.js Image component
+- Lazy loading for product images
+- Optimized bundle size
+- CSS pruning with Tailwind
+
+## Development
+
+### Run dev server:
+```bash
+pnpm dev
+```
+
+### Build for production:
+```bash
+pnpm build
+pnpm start
+```
+
+### Type check:
+```bash
+pnpm exec tsc --noEmit
+```
+
+### Lint:
+```bash
+pnpm lint
+```
+
+## Deployment
+
+### Deploy to Vercel
+
+1. Push your code to GitHub:
+```bash
+git push origin main
+```
+
+2. Import the repository into Vercel:
+   - Go to [vercel.com](https://vercel.com)
+   - Click "New Project"
+   - Select the `ecommerce-store` repository
+   - Add environment variables
+   - Deploy
+
+The store will be live at `your-domain.vercel.app`
+
+## Environment Variables
+
+Required environment variables:
+- `NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN` - Your Shopify store domain (e.g., shop.myshopify.com)
+- `NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN` - Shopify Storefront API access token
+
+## License
+
+MIT
+
+## Support
+
+For issues or questions, please open an issue on GitHub.
