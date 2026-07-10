@@ -1,8 +1,9 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
 
 /* Farfetch-inspired luxury white-cube gallery aesthetic */
 :root {
-  /* Colors — Monochrome system */
+  /* Colors — Monochrome system (Light Mode) */
   --color-carbon: #222222;
   --color-paper: #ffffff;
   --color-ash-gray: #b6b6b6;
@@ -16,9 +17,15 @@
   --surface-divider: #e6e6e6;
   --surface-inversion: #222222;
 
+  /* Dark Mode Colors */
+  --color-dark-bg: #1a1a1a;
+  --color-dark-text: #ffffff;
+  --color-dark-border: #333333;
+  --color-dark-ash: #666666;
+
   /* Typography — Font Families */
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-serif: Georgia, "Times New Roman", serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
 
   /* Typography — Scale */
   --text-caption: 13px;
@@ -50,6 +57,13 @@
 
   /* Radii — All zero for minimal aesthetic */
   --radius-default: 0px;
+
+  /* Animations */
+  --duration-fast: 200ms;
+  --duration-base: 300ms;
+  --duration-slow: 600ms;
+  --easing-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --easing-in-out: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @theme inline {
@@ -113,6 +127,89 @@ img {
   border-radius: 0;
   border: none;
   box-shadow: none;
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Animation utility classes */
+.animate-fade-in {
+  animation: fadeIn var(--duration-base) var(--easing-out);
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp var(--duration-base) var(--easing-out);
+}
+
+.animate-scale-in {
+  animation: scaleIn var(--duration-base) var(--easing-out);
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft var(--duration-base) var(--easing-out);
+}
+
+/* Dark Mode Theme */
+html.dark {
+  --color-carbon: #ffffff;
+  --color-paper: #1a1a1a;
+  --color-ash-gray: #888888;
+  --color-stone: #2a2a2a;
+  --color-graphite: #aaaaaa;
+  --color-smoke: #333333;
+  --surface-canvas: #1a1a1a;
+  --surface-wash: #2a2a2a;
+  --surface-divider: #333333;
+  --surface-inversion: #ffffff;
+}
+
+html.dark body {
+  background: var(--surface-canvas);
+  color: var(--color-carbon);
+}
+
+html.dark a:hover {
+  border-bottom-color: var(--color-carbon);
 }
 
 @media (prefers-reduced-motion: reduce) {

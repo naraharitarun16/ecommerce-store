@@ -6,6 +6,7 @@ import { Product } from '@/lib/types';
 import { getProductByHandle } from '@/lib/shopify';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
+import { ZoomGallery } from '@/components/zoom-gallery';
 
 export default function ProductPage() {
   const params = useParams();
@@ -67,41 +68,15 @@ export default function ProductPage() {
         <span className="text-gray-900">{product.title}</span>
       </div>
 
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-        {/* Image Gallery */}
-        <div className="space-y-4">
-          <div className="relative h-96 w-full bg-gray-100 rounded-lg overflow-hidden">
-            <Image
-              src={imageUrl}
-              alt={product.images.edges[selectedImage]?.node.altText || product.title}
-              fill
-              className="object-cover"
-              unoptimized
-            />
-          </div>
-
-          {/* Thumbnails */}
-          {product.images.edges.length > 1 && (
-            <div className="grid grid-cols-4 gap-2">
-              {product.images.edges.map((edge, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSelectedImage(index)}
-                  className={`relative h-20 rounded border-2 overflow-hidden ${
-                    selectedImage === index ? 'border-blue-600' : 'border-gray-200'
-                  }`}
-                >
-                  <Image
-                    src={edge.node.url}
-                    alt={edge.node.altText || `Product ${index + 1}`}
-                    fill
-                    className="object-cover"
-                    unoptimized
-                  />
-                </button>
-              ))}
-            </div>
-          )}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--spacing-48)' }}>
+        {/* Image Gallery with Zoom */}
+        <div>
+          <ZoomGallery
+            images={product.images.edges.map((edge) => ({
+              url: edge.node.url,
+              altText: edge.node.altText || product.title,
+            }))}
+          />
         </div>
 
         {/* Product Details */}
